@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نِداد للتصاميم — عرض سعر احترافي</title>
+<meta name="description" content="عرض سعر لـ هوية بصرية متكاملة">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap');
+
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e2c87a;
+  --gold-dim: rgba(201,168,76,0.15);
+  --dark: #111110;
+  --dark2: #1a1918;
+  --dark3: #222220;
+  --border: rgba(255,255,255,0.07);
+  --text: #e8e4dc;
+  --muted: rgba(232,228,220,0.45);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 60px;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(201,168,76,0.05) 0%, transparent 60%),
+    var(--dark);
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+.hero-tag {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold-light);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 7px 18px;
+  border-radius: 30px;
+  margin-bottom: 28px;
+  animation: fadeDown 0.7s ease both;
+}
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.4; transform:scale(0.7); }
+}
+
+.hero h1 {
+  position: relative;
+  font-size: clamp(36px, 7vw, 72px);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  animation: fadeDown 0.7s 0.1s ease both;
+}
+
+.hero h1 .accent {
+  color: var(--gold);
+  display: block;
+}
+
+.hero p {
+  position: relative;
+  font-size: clamp(15px, 2.2vw, 18px);
+  color: var(--muted);
+  max-width: 540px;
+  margin: 0 auto 40px;
+  font-weight: 400;
+  animation: fadeDown 0.7s 0.2s ease both;
+}
+
+/* Stats strip */
+.stats {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 700px;
+  width: 100%;
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(10px);
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+
+.stat {
+  flex: 1;
+  min-width: 120px;
+  padding: 24px 20px;
+  text-align: center;
+  border-left: 1px solid var(--border);
+  position: relative;
+}
+.stat:last-child { border-left: none; }
+
+.stat-num {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 5px;
+  display: block;
+}
+
+@keyframes fadeDown {
+  from { opacity:0; transform: translateY(-20px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(20px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity:0; }
+  to   { opacity:1; }
+}
+
+/* ─── SECTIONS ─── */
+.section {
+  padding: 80px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.section-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.section-title {
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 900;
+  line-height: 1.2;
+}
+.section-title span { color: var(--gold); }
+
+/* ─── SERVICES GRID ─── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.service-card {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 26px 24px;
+  transition: border-color 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 80px; height: 80px;
+  background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+  border-radius: 0 14px 0 100%;
+}
+.service-card:hover {
+  border-color: rgba(201,168,76,0.35);
+  transform: translateY(-3px);
+}
+
+.service-icon {
+  font-size: 26px;
+  margin-bottom: 14px;
+  display: block;
+}
+.service-name {
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.service-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.service-features {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.service-feat {
+  font-size: 12px;
+  color: rgba(201,168,76,0.7);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.service-feat::before {
+  content: '✦';
+  font-size: 8px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+/* Category separator */
+.cat-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin: 40px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cat-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(201,168,76,0.3), transparent);
+}
+
+/* ─── OCCASIONS ─── */
+.occasions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+.occasion-pill {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.25s;
+  cursor: default;
+}
+.occasion-pill:hover {
+  border-color: rgba(201,168,76,0.4);
+  background: var(--gold-dim);
+  color: var(--gold-light);
+}
+.occasion-pill .occasion-emoji {
+  font-size: 20px;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.discount-banner {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.05));
+  border: 1px solid rgba(201,168,76,0.35);
+  border-radius: 14px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.discount-big {
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+}
+.discount-text { font-size: 14px; color: var(--muted); }
+
+/* ─── PRICING ─── */
+.pricing-box {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.pricing-header {
+  background: var(--dark3);
+  padding: 32px 36px 28px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+.pricing-label { font-size: 12px; color: var(--muted); letter-spacing: 1px; }
+.pricing-amount {
+  font-size: 58px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  margin: 8px 0 4px;
+}
+.pricing-currency { font-size: 22px; font-weight: 400; }
+.pricing-note { font-size: 13px; color: var(--muted); }
+
+.pricing-rows { padding: 0; }
+.pricing-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 36px;
+  border-bottom: 1px solid var(--border);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.pricing-row:last-child { border-bottom: none; }
+.pricing-row-label { font-size: 14px; color: var(--muted); }
+.pricing-row-val {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+}
+.pricing-row-val.gold { color: var(--gold); }
+.paid-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(46,160,67,0.15);
+  border: 1px solid rgba(46,160,67,0.3);
+  color: #5bc16b;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* ─── TIMELINE ─── */
+.timeline {
+  position: relative;
+  padding-right: 30px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  right: 10px; top: 10px; bottom: 10px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 28px;
+  padding-right: 26px;
+}
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot {
+  position: absolute;
+  right: -26px; top: 6px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--dark);
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.3);
+}
+.tl-day {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.tl-title { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.tl-desc { font-size: 13px; color: var(--muted); }
+
+/* ─── DIVIDER ─── */
+.full-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+  margin: 0 24px;
+}
+
+/* ─── CTA ─── */
+.cta-section {
+  padding: 80px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%);
+}
+.cta-section h2 {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 900;
+  margin-bottom: 14px;
+  position: relative;
+}
+.cta-section p {
+  font-size: 15px;
+  color: var(--muted);
+  margin-bottom: 36px;
+  position: relative;
+}
+.cta-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--dark);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  padding: 16px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+}
+.cta-btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(201,168,76,0.45);
+}
+.cta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 32px;
+  position: relative;
+}
+.cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 7px 16px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ─── FOOTER ─── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.footer-brand { font-size: 14px; font-weight: 800; }
+.footer-brand span { color: var(--gold); }
+.footer-phone { font-size: 13px; color: var(--muted); direction: ltr; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  .stat { min-width: 90px; padding: 18px 12px; }
+  .stat-num { font-size: 24px; }
+  .pricing-row { padding: 16px 24px; }
+  .pricing-amount { font-size: 44px; }
+  .pricing-header { padding: 24px; }
+  .section { padding: 60px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-tag">مُعدّ خصيصاً لـ بنايات · نِداد للتصاميم</div>
+
+  <h1>
+    هويّتك البصرية الكاملة
+    <span class="accent">بين أيدٍ محترفة</span>
+  </h1>
+
+  <p>باقة شاملة من التصاميم الاحترافية تغطي كل احتياجاتك — من الهوية إلى السوشل ميديا</p>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num">+٢٠</span>
+      <span class="stat-label">تصميم متكامل</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">١٤</span>
+      <span class="stat-label">يوم تسليم</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">٣</span>
+      <span class="stat-label">مراجعات مجانية</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">١٠٠٠</span>
+      <span class="stat-label">ريال فقط</span>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- SERVICES -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">الخدمات المشمولة</div>
+    <h2 class="section-title">كل ما تحتاجه<br><span>في باقة واحدة</span></h2>
+  </div>
+
+  <!-- عناصر الهوية -->
+  <div class="cat-label">عناصر الهوية البصرية</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">📁</span>
+      <div class="service-name">تصميم فولدر</div>
+      <div class="service-desc">فولدر احترافي يعكس هوية علامتك التجارية</div>
+      <div class="service-features">
+        <div class="service-feat">وجهان — أمامي وخلفي</div>
+        <div class="service-feat">ملفات جاهزة للطباعة</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💳</span>
+      <div class="service-name">بطاقة أعمال</div>
+      <div class="service-desc">بزنس كارد احترافية تترك انطباعاً لا يُنسى</div>
+      <div class="service-features">
+        <div class="service-feat">تصميم وجهين</div>
+        <div class="service-feat">صيغ AI, PDF, PNG</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">📄</span>
+      <div class="service-name">ورق رسمي</div>
+      <div class="service-desc">ورق مراسلات رسمي مفتوح قابل للتعديل على Word</div>
+      <div class="service-features">
+        <div class="service-feat">نموذجان مختلفان</div>
+        <div class="service-feat">قالب Word قابل للتعديل</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">✉️</span>
+      <div class="service-name">تصميم أظرف</div>
+      <div class="service-desc">أظرف رسمية بهوية متكاملة مع باقي المطبوعات</div>
+      <div class="service-features">
+        <div class="service-feat">مقاسات قياسية</div>
+        <div class="service-feat">جاهز للطباعة</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🧾</span>
+      <div class="service-name">فاتورة + سندات</div>
+      <div class="service-desc">فاتورة وسندات صرف وقبض موحّدة بهوية الشركة</div>
+      <div class="service-features">
+        <div class="service-feat">سند صرف + سند قبض</div>
+        <div class="service-feat">قابلة للتعديل</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🔏</span>
+      <div class="service-name">تصميم ختم</div>
+      <div class="service-desc">ختم رسمي يُضفي المصداقية على وثائقك</div>
+      <div class="service-features">
+        <div class="service-feat">دائري أو مستطيل</div>
+        <div class="service-feat">صيغة PNG + AI</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- لوحات إعلانية -->
+  <div class="cat-label">اللوحات الإعلانية والطباعية</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">🪟</span>
+      <div class="service-name">لوحات البنر الإعلاني</div>
+      <div class="service-desc">بنرات احترافية لمختلف الأغراض والمقاسات</div>
+      <div class="service-features">
+        <div class="service-feat">مقاسات متعددة</div>
+        <div class="service-feat">دقة طباعة عالية</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🏢</span>
+      <div class="service-name">لوحة المبنى الإعلانية</div>
+      <div class="service-desc">لوحة خارجية مخصصة لواجهة مبناكم</div>
+      <div class="service-features">
+        <div class="service-feat">مقاس حسب الطلب</div>
+        <div class="service-feat">جاهز للإنتاج</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💬</span>
+      <div class="service-name">خطابات رسمية Word</div>
+      <div class="service-desc">قوالب خطابات مفتوحة قابلة للتعديل بسهولة</div>
+      <div class="service-features">
+        <div class="service-feat">متوافقة مع Word</div>
+        <div class="service-feat">هيدر + فوتر احترافي</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- سوشل ميديا -->
+  <div class="cat-label">السوشل ميديا والدفع</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">📱</span>
+      <div class="service-name">السوشل ميديا كاملة</div>
+      <div class="service-desc">هوية موحّدة لجميع منصاتك الاجتماعية</div>
+      <div class="service-features">
+        <div class="service-feat">غلاف + صورة بروفايل</div>
+        <div class="service-feat">تمبلت بوستات قابلة للتعديل</div>
+        <div class="service-feat">ستوري تمبلت</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💳</span>
+      <div class="service-name">وسائل الدفع + باركود</div>
+      <div class="service-desc">تصميم بطاقة وسائل الدفع مع باركود البنك مدمج</div>
+      <div class="service-features">
+        <div class="service-feat">باركود آبي / مدى</div>
+        <div class="service-feat">تصميم احترافي قابل للمشاركة</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="full-divider"></div>
+
+<!-- OCCASIONS -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">صور التهنئة</div>
+    <h2 class="section-title">تهاني <span>المناسبات</span></h2>
+    <p style="color:var(--muted);font-size:14px;margin-top:10px;">صور واتساب قابلة للتعديل لجميع المناسبات</p>
+  </div>
+
+  <div class="occasions-grid">
+    <div class="occasion-pill"><span class="occasion-emoji">🕌</span>يوم الجمعة</div>
+    <div class="occasion-pill"><span class="occasion-emoji">🌙</span>عيد الفطر المبارك</div>
+    <div class="occasion-pill"><span class="occasion-emoji">🐑</span>عيد الأضحى المبارك</div>
+    <div class="occasion-pill"><span class="occasion-emoji">🇸🇦</span>اليوم الوطني</div>
+    <div class="occasion-pill"><span class="occasion-emoji">🏛️</span>يوم التأسيس</div>
+    <div class="occasion-pill"><span class="occasion-emoji">⛰️</span>يوم عرفة</div>
+    <div class="occasion-pill"><span class="occasion-emoji">✨</span>شهر رمضان</div>
+    <div class="occasion-pill"><span class="occasion-emoji">📅</span>السنة الهجرية الجديدة</div>
+    <div class="occasion-pill"><span class="occasion-emoji">🎉</span>السنة الميلادية الجديدة</div>
+
+
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- PRICING -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">التسعير والدفع</div>
+    <h2 class="section-title">شفافية تامة<br><span>لا مفاجآت</span></h2>
+  </div>
+
+  <div class="pricing-box">
+    <div class="pricing-header">
+      <div class="pricing-label">إجمالي الباقة الكاملة</div>
+      <div class="pricing-amount"><span class="pricing-currency">﷼</span><span id="total-price">١٬٠٠٠</span></div>
+      <div class="pricing-note">شامل جميع الخدمات · +٢٠ تصميم احترافي</div>
+    </div>
+    <div class="pricing-rows">
+      <div class="pricing-row">
+        <div class="pricing-row-label">عربون البدء</div>
+        <div class="pricing-row-val gold">٥٠٠ ريال</div>
+      </div>
+      <div class="pricing-row">
+        <div class="pricing-row-label">الباقي — بعد الإنجاز وقبل التسليم</div>
+        <div class="pricing-row-val">٥٠٠ ريال</div>
+      </div>
+    </div>
+  </div>
+
+  <p style="text-align:center;font-size:13px;color:var(--muted);margin-top:22px;">
+    ✦ حقوق الملكية الكاملة للتصاميم تنتقل إليك &nbsp;·&nbsp; ✦ ملفات بجميع الصيغ (AI, PDF, PNG, DOCX)
+  </p>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- TIMELINE -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">مراحل التنفيذ</div>
+    <h2 class="section-title">خطوة بخطوة<br><span>١٤ يوماً</span></h2>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-day">اليوم ١</div>
+      <div class="tl-title">استلام العربون وبدء العمل</div>
+      <div class="tl-desc">نستلم شعارك وبياناتك، ونبدأ فوراً في تطوير عناصر الهوية الأساسية</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-day">اليوم ٢ – ٥</div>
+      <div class="tl-title">المسودات الأولى لعناصر الهوية</div>
+      <div class="tl-desc">الفولدر، البزنس كارد، الورق الرسمي، الأظرف، الختم</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-day">اليوم ٦ – ٩</div>
+      <div class="tl-title">تصاميم الطباعة والمستندات</div>
+      <div class="tl-desc">الفاتورة، السندات، الخطابات الرسمية، اللوحات الإعلانية</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-day">اليوم ١٠ – ١٢</div>
+      <div class="tl-title">السوشل ميديا والتهاني</div>
+      <div class="tl-desc">هوية المنصات، تمبلتات البوستات، صور التهنئة للمناسبات، وسائل الدفع</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-day">اليوم ١٣</div>
+      <div class="tl-title">مرحلة المراجعات النهائية</div>
+      <div class="tl-desc">تطبيق جميع التعديلات لضمان رضاك الكامل على كل تصميم</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-day">اليوم ١٤</div>
+      <div class="tl-title">التسليم النهائي الكامل</div>
+      <div class="tl-desc">بعد استلام المبلغ المتبقي، تُسلَّم جميع الملفات بجميع الصيغ منظمةً في فولدرات</div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>جاهز تبدأ؟<br><span style="color:var(--gold)">نحن أجهز منك!</span></h2>
+  <p>خطوة واحدة تفصلك عن هوية بصرية احترافية متكاملة</p>
+  <a href="https://wa.me/966537441043" class="cta-btn">
+    تواصل عبر واتساب 📲
+  </a>
+  <div class="cta-pills">
+    <span class="cta-pill">🔒 دفع آمن</span>
+    <span class="cta-pill">⚡ تسليم في ١٤ يوماً</span>
+    <span class="cta-pill">🎨 تصميم ١٠٠٪ مخصص</span>
+    <span class="cta-pill">🔄 مراجعات مجانية</span>
+    <span class="cta-pill">📁 ملفات كاملة بكل الصيغ</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="full-divider"></div>
+<footer class="footer">
+  <div class="footer-brand"><span>نِداد</span> للتصاميم والجرافيكس</div>
+  <div class="footer-phone">+966 537 441 043</div>
+</footer>
+
+<script>
+  // ─── السعر الإجمالي — عدّله هنا ─────────────────
+  const TOTAL = null; // ضع السعر مثلاً: 2000
+  // ──────────────────────────────────────────────────
+
+  function fmt(n) {
+    return n?.toLocaleString('ar-SA') ?? '___';
+  }
+
+  if (TOTAL) {
+    const half = TOTAL / 2;
+    document.getElementById('hero-price').textContent = fmt(TOTAL);
+    document.getElementById('total-price').textContent = fmt(TOTAL);
+    document.getElementById('deposit-price').textContent = fmt(half) + ' ريال';
+    document.getElementById('remaining-price').textContent = fmt(half) + ' ريال';
+  }
+</script>
+
+</body>
+</html>
