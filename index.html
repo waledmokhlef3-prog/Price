@@ -1,1446 +1,790 @@
-<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>نيبرا - الملف التعريفي</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<title>فاتورة — مشاري شري · نِداد للتصاميم</title>
 <style>
-  :root {
-    --burgundy: #5a1a2a;
-    --burgundy-dark: #3d0f1c;
-    --burgundy-light: #7a2a3e;
-    --gold: #c9a96e;
-    --gold-light: #e8d4a8;
-    --cream: #f5ede3;
-    --cream-dark: #ede0d0;
-    --silver: #c8c8c8;
-    --white: #ffffff;
-    --text-dark: #2a0e15;
-    --text-mid: #5a2030;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Cairo', sans-serif;
-    background: var(--cream);
-    color: var(--text-dark);
-    overflow-x: hidden;
-  }
-
-  /* ===== SCROLLBAR ===== */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--cream-dark); }
-  ::-webkit-scrollbar-thumb { background: var(--burgundy); border-radius: 3px; }
-
-  /* ===== NAV ===== */
-  nav {
-    position: fixed;
-    top: 0; right: 0; left: 0;
-    z-index: 100;
-    background: rgba(90,26,42,0.97);
-    backdrop-filter: blur(12px);
-    padding: 0 40px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(201,169,110,0.3);
-  }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .nav-logo-icon {
-    width: 42px;
-    height: 42px;
-  }
-
-  .nav-logo-text {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 22px;
-    font-weight: 900;
-    color: var(--gold);
-    letter-spacing: 1px;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-  }
-
-  .nav-links a {
-    color: var(--gold-light);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: color 0.3s;
-    position: relative;
-  }
-
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px; right: 0; left: 0;
-    height: 2px;
-    background: var(--gold);
-    transform: scaleX(0);
-    transition: transform 0.3s;
-  }
-
-  .nav-links a:hover { color: var(--gold); }
-  .nav-links a:hover::after { transform: scaleX(1); }
-
-  /* ===== HERO ===== */
-  .hero {
-    min-height: 100vh;
-    background: var(--burgundy-dark);
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  .hero-bg-pattern {
-    position: absolute;
-    inset: 0;
-    background-image:
-      radial-gradient(circle at 20% 50%, rgba(201,169,110,0.08) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(201,169,110,0.06) 0%, transparent 40%);
-  }
-
-  .hero-shapes {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
-
-  /* Large Arabic letter shapes like brand identity */
-  .shape-letter {
-    position: absolute;
-    font-family: 'Tajawal', sans-serif;
-    font-weight: 900;
-    color: rgba(201,169,110,0.06);
-    user-select: none;
-    line-height: 1;
-  }
-
-  .shape-1 { font-size: 500px; top: -100px; left: -80px; }
-  .shape-2 { font-size: 380px; bottom: -60px; right: -40px; transform: rotate(15deg); }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 120px 60px 80px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .hero-text { animation: fadeInRight 1s ease forwards; }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(201,169,110,0.15);
-    border: 1px solid rgba(201,169,110,0.4);
-    color: var(--gold);
-    padding: 8px 20px;
-    border-radius: 100px;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 28px;
-    letter-spacing: 1px;
-  }
-
-  .hero-badge::before {
-    content: '';
-    width: 8px; height: 8px;
-    background: var(--gold);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
-  .hero-title {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 72px;
-    font-weight: 900;
-    color: var(--white);
-    line-height: 1.1;
-    margin-bottom: 10px;
-  }
-
-  .hero-title span {
-    color: var(--gold);
-    display: block;
-  }
-
-  .hero-subtitle-ar {
-    font-size: 26px;
-    font-weight: 700;
-    color: var(--gold-light);
-    margin-bottom: 24px;
-  }
-
-  .hero-desc {
-    font-size: 15px;
-    color: rgba(255,255,255,0.65);
-    line-height: 1.9;
-    max-width: 420px;
-    margin-bottom: 40px;
-  }
-
-  .hero-cta {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, var(--gold), #a8834a);
-    color: var(--burgundy-dark);
-    padding: 14px 32px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.3s;
-    box-shadow: 0 8px 25px rgba(201,169,110,0.3);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(201,169,110,0.4);
-  }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--gold);
-    padding: 14px 32px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    text-decoration: none;
-    border: 1.5px solid rgba(201,169,110,0.5);
-    transition: all 0.3s;
-  }
-
-  .btn-outline:hover {
-    background: rgba(201,169,110,0.1);
-    border-color: var(--gold);
-  }
-
-  /* Hero visual - logo showcase */
-  .hero-visual {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 32px;
-    animation: fadeInLeft 1s ease 0.3s both;
-  }
-
-  .hero-logo-showcase {
-    width: 300px;
-    height: 300px;
-    border-radius: 24px;
-    background: linear-gradient(145deg, rgba(201,169,110,0.12), rgba(201,169,110,0.03));
-    border: 1px solid rgba(201,169,110,0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-logo-showcase::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: 26px;
-    background: linear-gradient(135deg, rgba(201,169,110,0.4), transparent, rgba(201,169,110,0.2));
-    z-index: -1;
-  }
-
-  .hero-logo-ar {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 88px;
-    font-weight: 900;
-    color: var(--gold);
-    text-shadow: 0 0 60px rgba(201,169,110,0.4);
-    line-height: 1;
-  }
-
-  .hero-logo-en {
-    font-size: 28px;
-    font-weight: 300;
-    color: rgba(201,169,110,0.7);
-    letter-spacing: 8px;
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
-
-  .hero-stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    width: 100%;
-  }
-
-  .stat-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(201,169,110,0.2);
-    border-radius: 12px;
-    padding: 20px 16px;
-    text-align: center;
-    transition: all 0.3s;
-  }
-
-  .stat-card:hover {
-    background: rgba(201,169,110,0.1);
-    border-color: rgba(201,169,110,0.4);
-    transform: translateY(-3px);
-  }
-
-  .stat-number {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--gold);
-    display: block;
-  }
-
-  .stat-label {
-    font-size: 12px;
-    color: rgba(255,255,255,0.6);
-    margin-top: 4px;
-  }
-
-  /* ===== CONTACT BAR ===== */
-  .contact-bar {
-    background: var(--gold);
-    padding: 16px 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 48px;
-    flex-wrap: wrap;
-  }
-
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--burgundy-dark);
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  .contact-icon {
-    width: 36px; height: 36px;
-    background: var(--burgundy-dark);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-  }
-
-  /* ===== SECTIONS ===== */
-  .section {
-    padding: 100px 60px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .section-header {
-    text-align: center;
-    margin-bottom: 70px;
-  }
-
-  .section-tag {
-    display: inline-block;
-    background: rgba(90,26,42,0.1);
-    color: var(--burgundy);
-    padding: 6px 18px;
-    border-radius: 100px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    margin-bottom: 16px;
-    border: 1px solid rgba(90,26,42,0.2);
-  }
-
-  .section-title {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 46px;
-    font-weight: 900;
-    color: var(--burgundy-dark);
-    line-height: 1.2;
-    margin-bottom: 16px;
-  }
-
-  .section-desc {
-    font-size: 16px;
-    color: #7a5060;
-    line-height: 1.8;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  /* ===== ABOUT ===== */
-  .about-section {
-    background: var(--white);
-    padding: 0;
-  }
-
-  .about-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 100px 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .about-visual {
-    position: relative;
-  }
-
-  .about-card-main {
-    background: var(--burgundy);
-    border-radius: 20px;
-    padding: 50px 40px;
-    color: white;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .about-card-main::before {
-    content: 'نيبرا';
-    position: absolute;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 180px;
-    font-weight: 900;
-    color: rgba(255,255,255,0.05);
-    bottom: -30px;
-    left: -20px;
-    line-height: 1;
-  }
-
-  .about-card-main .quote-mark {
-    font-size: 80px;
-    color: var(--gold);
-    line-height: 0.8;
-    margin-bottom: 20px;
-    display: block;
-    font-family: serif;
-  }
-
-  .about-card-main p {
-    font-size: 17px;
-    line-height: 2;
-    color: rgba(255,255,255,0.85);
-    position: relative;
-    z-index: 1;
-  }
-
-  .about-badge {
-    position: absolute;
-    top: -20px; left: 30px;
-    background: var(--gold);
-    color: var(--burgundy-dark);
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-weight: 800;
-    font-size: 14px;
-    box-shadow: 0 8px 25px rgba(201,169,110,0.4);
-  }
-
-  .about-text h2 {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 42px;
-    font-weight: 900;
-    color: var(--burgundy-dark);
-    margin-bottom: 24px;
-    line-height: 1.2;
-  }
-
-  .about-text h2 span { color: var(--gold); }
-
-  .about-text p {
-    font-size: 15px;
-    line-height: 2;
-    color: #5a3540;
-    margin-bottom: 16px;
-  }
-
-  .about-features {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 32px;
-  }
-
-  .feature-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 16px;
-    background: rgba(90,26,42,0.04);
-    border-radius: 12px;
-    border-right: 3px solid var(--gold);
-    transition: all 0.3s;
-  }
-
-  .feature-item:hover {
-    background: rgba(90,26,42,0.08);
-    transform: translateX(-4px);
-  }
-
-  .feature-icon {
-    width: 40px; height: 40px;
-    background: var(--burgundy);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-
-  .feature-text {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--burgundy-dark);
-    line-height: 1.5;
-  }
-
-  /* ===== VALUES ===== */
-  .values-section {
-    background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
-    padding: 100px 0;
-  }
-
-  .values-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin-top: 60px;
-  }
-
-  .value-card {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 40px 32px;
-    text-align: center;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(90,26,42,0.1);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .value-card::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0; left: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--gold), var(--burgundy));
-    transform: scaleX(0);
-    transition: transform 0.4s;
-    transform-origin: right;
-  }
-
-  .value-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(90,26,42,0.12);
-  }
-
-  .value-card:hover::before { transform: scaleX(1); }
-
-  .value-number {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--gold);
-    letter-spacing: 3px;
-    margin-bottom: 16px;
-  }
-
-  .value-icon-wrap {
-    width: 70px; height: 70px;
-    background: linear-gradient(135deg, var(--burgundy), var(--burgundy-light));
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 28px;
-    box-shadow: 0 8px 20px rgba(90,26,42,0.2);
-    transition: transform 0.3s;
-  }
-
-  .value-card:hover .value-icon-wrap { transform: rotate(-5deg) scale(1.1); }
-
-  .value-title {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--burgundy-dark);
-    margin-bottom: 12px;
-  }
-
-  .value-desc {
-    font-size: 13px;
-    color: #7a5060;
-    line-height: 1.8;
-  }
-
-  /* ===== SERVICES ===== */
-  .services-section {
-    background: var(--white);
-    padding: 100px 0;
-  }
-
-  .services-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px;
-    margin-top: 60px;
-  }
-
-  .service-card {
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(90,26,42,0.1);
-    transition: all 0.4s;
-    background: var(--cream);
-    display: flex;
-    align-items: stretch;
-    min-height: 200px;
-    position: relative;
-  }
-
-  .service-card:hover {
-    box-shadow: 0 20px 50px rgba(90,26,42,0.12);
-    transform: translateY(-4px);
-  }
-
-  .service-stripe {
-    width: 8px;
-    background: linear-gradient(180deg, var(--gold), var(--burgundy));
-    flex-shrink: 0;
-    transition: width 0.3s;
-  }
-
-  .service-card:hover .service-stripe { width: 12px; }
-
-  .service-body {
-    padding: 36px 32px;
-    flex: 1;
-  }
-
-  .service-icon-num {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 18px;
-  }
-
-  .service-num {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 13px;
-    font-weight: 800;
-    color: var(--gold);
-    background: rgba(90,26,42,0.08);
-    width: 36px; height: 36px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .service-emoji {
-    font-size: 26px;
-  }
-
-  .service-title {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--burgundy-dark);
-    margin-bottom: 10px;
-  }
-
-  .service-desc {
-    font-size: 13.5px;
-    color: #6a404e;
-    line-height: 1.9;
-  }
-
-  /* ===== WHY US ===== */
-  .why-section {
-    background: var(--burgundy-dark);
-    padding: 100px 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .why-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(201,169,110,0.08), transparent 60%);
-  }
-
-  .why-section .section-title { color: var(--white); }
-  .why-section .section-tag {
-    background: rgba(201,169,110,0.15);
-    color: var(--gold);
-    border-color: rgba(201,169,110,0.3);
-  }
-  .why-section .section-desc { color: rgba(255,255,255,0.6); }
-
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    margin-top: 60px;
-  }
-
-  .why-item {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(201,169,110,0.15);
-    border-radius: 16px;
-    padding: 32px 28px;
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-    transition: all 0.3s;
-  }
-
-  .why-item:hover {
-    background: rgba(201,169,110,0.08);
-    border-color: rgba(201,169,110,0.35);
-    transform: translateX(-6px);
-  }
-
-  .why-icon {
-    width: 52px; height: 52px;
-    background: linear-gradient(135deg, var(--gold), #a8834a);
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    flex-shrink: 0;
-  }
-
-  .why-text h4 {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 17px;
-    font-weight: 800;
-    color: var(--gold-light);
-    margin-bottom: 8px;
-  }
-
-  .why-text p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.9;
-  }
-
-  /* ===== CONTACT SECTION ===== */
-  .contact-section {
-    background: var(--cream);
-    padding: 100px 0;
-  }
-
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    margin-top: 60px;
-    align-items: start;
-  }
-
-  .contact-info-card {
-    background: var(--burgundy);
-    border-radius: 24px;
-    padding: 50px 40px;
-    color: white;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .contact-info-card::after {
-    content: 'تواصل';
-    position: absolute;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 120px;
-    font-weight: 900;
-    color: rgba(255,255,255,0.04);
-    bottom: -20px;
-    left: -10px;
-    line-height: 1;
-  }
-
-  .contact-info-card h3 {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 32px;
-    font-weight: 900;
-    color: var(--gold);
-    margin-bottom: 8px;
-  }
-
-  .contact-info-card p.sub {
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 40px;
-    font-size: 14px;
-  }
-
-  .contact-detail {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 24px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .contact-detail-icon {
-    width: 48px; height: 48px;
-    background: rgba(201,169,110,0.2);
-    border: 1px solid rgba(201,169,110,0.3);
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-
-  .contact-detail-info {
-    flex: 1;
-  }
-
-  .contact-detail-label {
-    font-size: 11px;
-    color: var(--gold);
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-  }
-
-  .contact-detail-value {
-    font-size: 16px;
-    font-weight: 600;
-    color: white;
-    direction: ltr;
-    text-align: right;
-  }
-
-  .contact-map-placeholder {
-    background: var(--white);
-    border-radius: 24px;
-    padding: 40px;
-    border: 1px solid rgba(90,26,42,0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .map-icon {
-    width: 100%;
-    height: 220px;
-    background: linear-gradient(135deg, rgba(90,26,42,0.08), rgba(201,169,110,0.08));
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 60px;
-    border: 2px dashed rgba(90,26,42,0.15);
-  }
-
-  .map-details h4 {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 20px;
-    font-weight: 800;
-    color: var(--burgundy-dark);
-    margin-bottom: 8px;
-  }
-
-  .map-details p {
-    font-size: 14px;
-    color: #7a5060;
-    line-height: 1.8;
-  }
-
-  /* ===== FOOTER ===== */
-  footer {
-    background: var(--burgundy-dark);
-    padding: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 24px;
-    border-top: 1px solid rgba(201,169,110,0.2);
-  }
-
-  .footer-brand {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .footer-logo-circle {
-    width: 50px; height: 50px;
-    background: linear-gradient(135deg, var(--gold), #a8834a);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .footer-logo-circle span {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 18px;
-    font-weight: 900;
-    color: var(--burgundy-dark);
-  }
-
-  .footer-brand-text h4 {
-    font-family: 'Tajawal', sans-serif;
-    font-size: 20px;
-    font-weight: 900;
-    color: var(--gold);
-  }
-
-  .footer-brand-text p {
-    font-size: 12px;
-    color: rgba(255,255,255,0.5);
-    margin-top: 2px;
-  }
-
-  .footer-copy {
-    font-size: 13px;
-    color: rgba(255,255,255,0.4);
-    text-align: center;
-  }
-
-  .footer-copy span { color: var(--gold); }
-
-  /* ===== DIVIDER ===== */
-  .gold-divider {
-    height: 4px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    opacity: 0.4;
-  }
-
-  /* ===== ANIMATIONS ===== */
-  @keyframes fadeInRight {
-    from { opacity: 0; transform: translateX(40px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  @keyframes fadeInLeft {
-    from { opacity: 0; transform: translateX(-40px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
-
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .fade-up {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 900px) {
-    .hero-content { grid-template-columns: 1fr; gap: 40px; padding: 100px 30px 60px; }
-    .hero-title { font-size: 48px; }
-    .about-inner { grid-template-columns: 1fr; padding: 60px 30px; }
-    .values-grid { grid-template-columns: 1fr 1fr; }
-    .services-grid { grid-template-columns: 1fr; }
-    .why-grid { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: 1fr; }
-    nav { padding: 0 20px; }
-    .nav-links { display: none; }
-    .section { padding: 60px 30px; }
-    footer { padding: 40px 30px; flex-direction: column; align-items: flex-start; }
-    .contact-bar { padding: 16px 30px; gap: 24px; }
-  }
-
-  @media (max-width: 560px) {
-    .values-grid { grid-template-columns: 1fr; }
-    .about-features { grid-template-columns: 1fr; }
-    .hero-stats { grid-template-columns: 1fr 1fr; }
-  }
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap');
+
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e2c87a;
+  --gold-dim: rgba(201,168,76,0.15);
+  --dark: #111110;
+  --dark2: #1a1918;
+  --dark3: #222220;
+  --border: rgba(255,255,255,0.07);
+  --text: #e8e4dc;
+  --muted: rgba(232,228,220,0.45);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.7;
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 60px;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(201,168,76,0.05) 0%, transparent 60%),
+    var(--dark);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+.hero-tag {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold-light);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 7px 18px;
+  border-radius: 30px;
+  margin-bottom: 28px;
+  animation: fadeDown 0.7s ease both;
+}
+.hero-tag::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.4; transform:scale(0.7); }
+}
+
+.hero h1 {
+  position: relative;
+  font-size: clamp(36px, 7vw, 68px);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  animation: fadeDown 0.7s 0.1s ease both;
+}
+.hero h1 .accent { color: var(--gold); display: block; }
+.hero p {
+  position: relative;
+  font-size: clamp(15px, 2.2vw, 17px);
+  color: var(--muted);
+  max-width: 500px;
+  margin: 0 auto 40px;
+  animation: fadeDown 0.7s 0.2s ease both;
+}
+
+/* Invoice number */
+.inv-number {
+  position: relative;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 32px;
+  animation: fadeDown 0.7s 0.15s ease both;
+}
+.inv-number strong { color: var(--gold); }
+
+/* Stats */
+.stats {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 700px;
+  width: 100%;
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(10px);
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+.stat {
+  flex: 1;
+  min-width: 120px;
+  padding: 24px 20px;
+  text-align: center;
+  border-left: 1px solid var(--border);
+}
+.stat:last-child { border-left: none; }
+.stat-num { font-size: 30px; font-weight: 900; color: var(--gold); line-height: 1; display: block; }
+.stat-label { font-size: 12px; color: var(--muted); margin-top: 5px; display: block; }
+
+@keyframes fadeDown {
+  from { opacity:0; transform:translateY(-20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ─── CLIENT INFO CARD ─── */
+.client-section {
+  padding: 60px 24px 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.client-card {
+  background: var(--dark2);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 16px;
+  padding: 28px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.client-info { display: flex; flex-direction: column; gap: 4px; }
+.client-label { font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 2px; }
+.client-name { font-size: 26px; font-weight: 900; }
+.date-info { text-align: left; }
+.date-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+.date-val { font-size: 16px; font-weight: 700; color: var(--gold-light); }
+
+/* ─── SECTIONS ─── */
+.section {
+  padding: 60px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.section-header { text-align: center; margin-bottom: 48px; }
+.section-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.section-title { font-size: clamp(24px, 4vw, 38px); font-weight: 900; line-height: 1.2; }
+.section-title span { color: var(--gold); }
+
+/* ─── SERVICES ─── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 14px;
+}
+.service-card {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 22px;
+  transition: border-color 0.3s, transform 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 70px; height: 70px;
+  background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+  border-radius: 0 14px 0 100%;
+}
+.service-card:hover { border-color: rgba(201,168,76,0.35); transform: translateY(-3px); }
+.service-icon { font-size: 24px; margin-bottom: 12px; display: block; }
+.service-name { font-size: 15px; font-weight: 800; margin-bottom: 6px; }
+.service-desc { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+.service-features { margin-top: 12px; display: flex; flex-direction: column; gap: 4px; }
+.service-feat {
+  font-size: 11.5px;
+  color: rgba(201,168,76,0.7);
+  display: flex; align-items: center; gap: 5px;
+}
+.service-feat::before { content: '✦'; font-size: 8px; color: var(--gold); flex-shrink: 0; }
+
+.cat-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px;
+  color: var(--gold); text-transform: uppercase;
+  margin: 36px 0 14px;
+  display: flex; align-items: center; gap: 12px;
+}
+.cat-label::after {
+  content: ''; flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(201,168,76,0.3), transparent);
+}
+
+/* ─── OCCASIONS ─── */
+.occasions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+.occasion-pill {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  text-align: center;
+  font-size: 13.5px; font-weight: 600;
+  transition: all 0.25s; cursor: default;
+}
+.occasion-pill:hover {
+  border-color: rgba(201,168,76,0.4);
+  background: var(--gold-dim);
+  color: var(--gold-light);
+}
+.occasion-pill .occasion-emoji { font-size: 18px; display: block; margin-bottom: 5px; }
+
+/* ─── PAYMENT BOX ─── */
+.payment-section {
+  padding: 0 24px 60px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.payment-title-row {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.invoice-table {
+  background: var(--dark2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Table header */
+.inv-table-head {
+  background: var(--dark3);
+  padding: 28px 36px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.inv-client-col { display: flex; flex-direction: column; gap: 3px; }
+.inv-client-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+.inv-client-name { font-size: 20px; font-weight: 900; }
+.inv-total-col { text-align: left; }
+.inv-total-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+.inv-total-amount { font-size: 42px; font-weight: 900; color: var(--gold); line-height: 1; }
+.inv-total-currency { font-size: 18px; font-weight: 400; }
+
+/* Payment rows */
+.inv-rows { }
+
+.inv-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 36px;
+  border-bottom: 1px solid var(--border);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.inv-row:last-child { border-bottom: none; }
+
+.inv-row-right { display: flex; flex-direction: column; gap: 3px; }
+.inv-row-label { font-size: 14px; color: var(--text); font-weight: 600; }
+.inv-row-note { font-size: 12px; color: var(--muted); }
+
+.inv-row-amount {
+  font-size: 22px;
+  font-weight: 900;
+}
+.inv-row-amount.gold { color: var(--gold); }
+.inv-row-amount.white { color: var(--text); }
+
+/* Required badge */
+.required-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold-light);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-top: 4px;
+}
+.required-badge::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 2s infinite;
+}
+
+/* Footer note */
+.inv-footer-note {
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-top: 20px;
+}
+
+/* ─── TIMELINE ─── */
+.timeline {
+  position: relative;
+  padding-right: 30px;
+  max-width: 580px;
+  margin: 0 auto;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  right: 10px; top: 10px; bottom: 10px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+}
+.tl-item { position: relative; margin-bottom: 26px; padding-right: 24px; }
+.tl-item:last-child { margin-bottom: 0; }
+.tl-dot {
+  position: absolute;
+  right: -24px; top: 6px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid var(--dark);
+  box-shadow: 0 0 0 2px rgba(201,168,76,0.3);
+}
+.tl-day { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: var(--gold); margin-bottom: 3px; }
+.tl-title { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+.tl-desc { font-size: 13px; color: var(--muted); }
+
+/* ─── CTA ─── */
+.cta-section {
+  padding: 70px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 70%);
+}
+.cta-section h2 { font-size: clamp(26px, 5vw, 44px); font-weight: 900; margin-bottom: 12px; position: relative; }
+.cta-section p { font-size: 14px; color: var(--muted); margin-bottom: 32px; position: relative; }
+.cta-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gold);
+  color: var(--dark);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 17px; font-weight: 800;
+  padding: 15px 38px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+}
+.cta-btn:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,168,76,0.45); }
+.cta-pills {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 10px; margin-top: 28px; position: relative;
+}
+.cta-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 7px 14px;
+  font-size: 13px; color: var(--muted);
+}
+
+/* ─── DIVIDER / FOOTER ─── */
+.full-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+  margin: 0 24px;
+}
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 26px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.footer-brand { font-size: 14px; font-weight: 800; }
+.footer-brand span { color: var(--gold); }
+.footer-phone { font-size: 13px; color: var(--muted); direction: ltr; }
+
+@media (max-width: 600px) {
+  .stat { min-width: 90px; padding: 16px 10px; }
+  .stat-num { font-size: 22px; }
+  .inv-table-head { flex-direction: column; align-items: flex-start; }
+  .inv-total-col { text-align: right; }
+  .inv-row { padding: 16px 22px; }
+  .inv-table-head { padding: 22px; }
+  .client-card { flex-direction: column; }
+  .date-info { text-align: right; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">
-    <svg class="nav-logo-icon" viewBox="0 0 42 42" fill="none">
-      <circle cx="21" cy="21" r="20" stroke="#c9a96e" stroke-width="1.5"/>
-      <text x="21" y="28" text-anchor="middle" font-family="Tajawal" font-size="18" font-weight="900" fill="#c9a96e">ن</text>
-    </svg>
-    <span class="nav-logo-text">نيبرا</span>
-  </div>
-  <ul class="nav-links">
-    <li><a href="#about">من نحن</a></li>
-    <li><a href="#values">قيمنا</a></li>
-    <li><a href="#services">خدماتنا</a></li>
-    <li><a href="#why">لماذا نيبرا</a></li>
-    <li><a href="#contact">تواصل معنا</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
+<!-- ═══ HERO ═══ -->
 <section class="hero">
-  <div class="hero-bg-pattern"></div>
-  <div class="hero-shapes">
-    <div class="shape-letter shape-1">ن</div>
-    <div class="shape-letter shape-2">ر</div>
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-tag">فاتورة رسمية · نِداد للتصاميم</div>
+
+  <h1>
+    هويّتك البصرية الكاملة
+    <span class="accent">بين أيدٍ محترفة</span>
+  </h1>
+
+  <div class="inv-number">
+    رقم الفاتورة: <strong>#ND-<span id="inv-num"></span></strong> &nbsp;·&nbsp; تاريخ: <strong id="inv-date"></strong>
   </div>
-  <div class="hero-content">
-    <div class="hero-text">
-      <div class="hero-badge">شركة نيبرا المحدودة</div>
-      <div class="hero-title">
-        نيبرا
-        <span>للتشغيل</span>
-      </div>
-      <div class="hero-subtitle-ar">والصيانة المتكاملة</div>
-      <p class="hero-desc">
-        نقدم خدمات تشغيل وصيانة احترافية بأعلى معايير الجودة، من خلال كوادر متخصصة وتقنيات حديثة، لضمان بيئة آمنة ومرافق مستدامة لعملائنا.
-      </p>
-      <div class="hero-cta">
-        <a href="#services" class="btn-primary">استعرض خدماتنا</a>
-        <a href="#contact" class="btn-outline">تواصل معنا</a>
-      </div>
+
+  <p>باقة شاملة من التصاميم الاحترافية — من الهوية إلى السوشل ميديا</p>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num">+٢٠</span>
+      <span class="stat-label">تصميم متكامل</span>
     </div>
-    <div class="hero-visual">
-      <div class="hero-logo-showcase">
-        <div style="text-align:center">
-          <div class="hero-logo-ar">نيبرا</div>
-          <div class="hero-logo-en">NiBRA</div>
-        </div>
-      </div>
-      <div class="hero-stats">
-        <div class="stat-card">
-          <span class="stat-number">٦+</span>
-          <div class="stat-label">خدمات متكاملة</div>
-        </div>
-        <div class="stat-card">
-          <span class="stat-number">٢٤/٧</span>
-          <div class="stat-label">دعم مستمر</div>
-        </div>
-        <div class="stat-card">
-          <span class="stat-number">١٠٠%</span>
-          <div class="stat-label">رضا العملاء</div>
-        </div>
-      </div>
+    <div class="stat">
+      <span class="stat-num">١٤</span>
+      <span class="stat-label">يوم تسليم</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">٣</span>
+      <span class="stat-label">مراجعات مجانية</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">٦٠٠</span>
+      <span class="stat-label">ريال فقط</span>
     </div>
   </div>
 </section>
 
-<!-- CONTACT BAR -->
-<div class="contact-bar">
-  <div class="contact-item">
-    <div class="contact-icon">📞</div>
-    <span>0596062777</span>
-  </div>
-  <div class="contact-item">
-    <div class="contact-icon">✉️</div>
-    <span>info@nibra.sa</span>
-  </div>
-  <div class="contact-item">
-    <div class="contact-icon">📍</div>
-    <span>طريق الإمام محمد بن سعود، حي اليرموك، الرياض</span>
+<!-- ═══ CLIENT CARD ═══ -->
+<div class="client-section">
+  <div class="client-card">
+    <div class="client-info">
+      <span class="client-label">مُعدّ خصيصاً لـ</span>
+      <span class="client-name">مشاري شري</span>
+    </div>
+    <div class="date-info">
+      <div class="date-label">تاريخ إصدار الفاتورة</div>
+      <div class="date-val" id="client-date"></div>
+    </div>
   </div>
 </div>
 
-<!-- ABOUT -->
-<section class="about-section" id="about">
-  <div class="about-inner">
-    <div class="about-visual fade-up">
-      <div class="about-badge">من نحن؟</div>
-      <div class="about-card-main">
-        <span class="quote-mark">"</span>
-        <p>
-          نيبرا مؤسسة طموحة نشأت على يد مجموعة من ذوي الخبرة والمهارة، لتقدم لعملائها خدمات تشغيل وصيانة ذات جودة استثنائية، من خلال توفير مهندسين مختصين على أعلى درجات الكفاءة والخبرة والتطوير، حتى تضمن لعملائها الأمن والسلامة ومرافق ذات بنية تحتية قوية لتحقيق مبدأ الإستدامة والحفاظ على جودة الحياة.
-        </p>
+<div class="full-divider" style="margin-top:40px;"></div>
+
+<!-- ═══ SERVICES ═══ -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">الخدمات المشمولة</div>
+    <h2 class="section-title">كل ما تحتاجه<br><span>في باقة واحدة</span></h2>
+  </div>
+
+  <div class="cat-label">عناصر الهوية البصرية</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">📁</span>
+      <div class="service-name">تصميم فولدر</div>
+      <div class="service-desc">فولدر احترافي يعكس هوية علامتك التجارية</div>
+      <div class="service-features">
+        <div class="service-feat">وجهان — أمامي وخلفي</div>
+        <div class="service-feat">جاهز للطباعة</div>
       </div>
     </div>
-    <div class="about-text fade-up">
-      <h2>شركاؤك في <span>الجودة</span> والاستدامة</h2>
-      <p>
-        نسعى في نيبرا باستقطاب أفضل الكوادر المهنية المدربة، ممن يمتلكون الخبرة والكفاءة والاحترافية، ونعتمد على السرعة والجودة لتلبية احتياجات العملاء.
-      </p>
-      <p>
-        نوجه كافة الموارد البشرية والمالية والتقنية لرفع مستوى الخدمات المقدمة، حتى نضمن لهم بنية تحتية قوية وثابتة، ومنشآت ومرافق آمنة ومحققة لمعايير الجودة والسلامة.
-      </p>
-      <div class="about-features">
-        <div class="feature-item">
-          <div class="feature-icon">⚡</div>
-          <div class="feature-text">تقنيات حديثة ومنهجيات ذكية</div>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">👷</div>
-          <div class="feature-text">كوادر مدربة ومؤهلة</div>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">🌱</div>
-          <div class="feature-text">الاستدامة والحفاظ على البيئة</div>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">🏆</div>
-          <div class="feature-text">معايير عالمية في الإنجاز</div>
-        </div>
+    <div class="service-card">
+      <span class="service-icon">💳</span>
+      <div class="service-name">بطاقة أعمال</div>
+      <div class="service-desc">بزنس كارد احترافية تترك انطباعاً لا يُنسى</div>
+      <div class="service-features">
+        <div class="service-feat">تصميم وجهين</div>
+        <div class="service-feat">صيغ AI, PDF, PNG</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">📄</span>
+      <div class="service-name">ورق رسمي</div>
+      <div class="service-desc">ورق مراسلات مفتوح قابل للتعديل على Word</div>
+      <div class="service-features">
+        <div class="service-feat">نموذجان مختلفان</div>
+        <div class="service-feat">قالب Word قابل للتعديل</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">✉️</span>
+      <div class="service-name">تصميم أظرف</div>
+      <div class="service-desc">أظرف رسمية بهوية متكاملة</div>
+      <div class="service-features">
+        <div class="service-feat">مقاسات قياسية</div>
+        <div class="service-feat">جاهز للطباعة</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🧾</span>
+      <div class="service-name">فاتورة + سندات</div>
+      <div class="service-desc">فاتورة وسندات صرف وقبض موحّدة</div>
+      <div class="service-features">
+        <div class="service-feat">سند صرف + سند قبض</div>
+        <div class="service-feat">قابلة للتعديل</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🔏</span>
+      <div class="service-name">تصميم ختم</div>
+      <div class="service-desc">ختم رسمي يُضفي المصداقية على وثائقك</div>
+      <div class="service-features">
+        <div class="service-feat">دائري أو مستطيل</div>
+        <div class="service-feat">صيغة PNG + AI</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-label">اللوحات الإعلانية والطباعية</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">🪟</span>
+      <div class="service-name">لوحات البنر الإعلاني</div>
+      <div class="service-desc">بنرات احترافية بمقاسات متعددة</div>
+      <div class="service-features">
+        <div class="service-feat">دقة طباعة عالية</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🏢</span>
+      <div class="service-name">لوحة المبنى الإعلانية</div>
+      <div class="service-desc">لوحة خارجية مخصصة لواجهة المبنى</div>
+      <div class="service-features">
+        <div class="service-feat">مقاس حسب الطلب</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💬</span>
+      <div class="service-name">خطابات رسمية Word</div>
+      <div class="service-desc">قوالب خطابات مفتوحة قابلة للتعديل</div>
+      <div class="service-features">
+        <div class="service-feat">هيدر + فوتر احترافي</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-label">السوشل ميديا والدفع</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="service-icon">📱</span>
+      <div class="service-name">السوشل ميديا كاملة</div>
+      <div class="service-desc">هوية موحّدة لجميع المنصات</div>
+      <div class="service-features">
+        <div class="service-feat">غلاف + صورة بروفايل</div>
+        <div class="service-feat">تمبلت بوستات + ستوري</div>
+      </div>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💳</span>
+      <div class="service-name">وسائل الدفع + باركود</div>
+      <div class="service-desc">بطاقة وسائل الدفع مع باركود البنك</div>
+      <div class="service-features">
+        <div class="service-feat">باركود آبي / مدى</div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="gold-divider"></div>
+<div class="full-divider"></div>
 
-<!-- VALUES -->
-<section class="values-section" id="values">
-  <div class="section" style="padding-bottom:0">
-    <div class="section-header fade-up">
-      <div class="section-tag">CORE VALUES</div>
-      <h2 class="section-title">قـيمنا</h2>
-      <p class="section-desc">ندار بمنظومة قيم راسخة تجعلنا شريكاً موثوقاً لكل عملائنا</p>
+<!-- ═══ OCCASIONS ═══ -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">صور التهنئة</div>
+    <h2 class="section-title">تهاني <span>المناسبات</span></h2>
+    <p style="color:var(--muted);font-size:13.5px;margin-top:10px;">صور واتساب قابلة للتعديل لجميع المناسبات</p>
+  </div>
+  <div class="occasions-grid">
+    <div class="occasion-pill"><span class="occasion-emoji">🕌</span>يوم الجمعة</div>
+    <div class="occasion-pill"><span class="occasion-emoji">🌙</span>عيد الفطر المبارك</div>
+    <div class="occasion-pill"><span class="occasion-emoji">🐑</span>عيد الأضحى المبارك</div>
+    <div class="occasion-pill"><span class="occasion-emoji">🇸🇦</span>اليوم الوطني</div>
+    <div class="occasion-pill"><span class="occasion-emoji">🏛️</span>يوم التأسيس</div>
+    <div class="occasion-pill"><span class="occasion-emoji">⛰️</span>يوم عرفة</div>
+    <div class="occasion-pill"><span class="occasion-emoji">✨</span>شهر رمضان</div>
+    <div class="occasion-pill"><span class="occasion-emoji">📅</span>السنة الهجرية الجديدة</div>
+    <div class="occasion-pill"><span class="occasion-emoji">🎉</span>السنة الميلادية الجديدة</div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ═══ PAYMENT / INVOICE ═══ -->
+<section class="payment-section" style="padding-top:60px;">
+  <div class="payment-title-row">
+    <div class="section-tag">التسعير والدفع</div>
+    <h2 class="section-title" style="margin-top:10px;">فاتورة <span>واضحة وشفافة</span></h2>
+  </div>
+
+  <div class="invoice-table">
+    <!-- Header -->
+    <div class="inv-table-head">
+      <div class="inv-client-col">
+        <span class="inv-client-label">العميل</span>
+        <span class="inv-client-name">مشاري شري</span>
+      </div>
+      <div class="inv-total-col">
+        <div class="inv-total-label">الإجمالي</div>
+        <div class="inv-total-amount"><span class="inv-total-currency">﷼</span>٦٠٠</div>
+      </div>
     </div>
-    <div class="values-grid">
-      <div class="value-card fade-up">
-        <div class="value-number">01</div>
-        <div class="value-icon-wrap">⭐</div>
-        <div class="value-title">الجودة والإتقان</div>
-        <p class="value-desc">نلتزم بأعلى معايير الجودة في كل عمل نقوم به، لأن الإتقان ليس خياراً بل هو ثقافتنا.</p>
+
+    <!-- Rows -->
+    <div class="inv-rows">
+      <div class="inv-row">
+        <div class="inv-row-right">
+          <span class="inv-row-label">عربون بدء العمل</span>
+          <span class="inv-row-note">مطلوب لبدء التنفيذ</span>
+          <span class="required-badge">مطلوب الآن</span>
+        </div>
+        <div class="inv-row-amount gold">٣٠٠ ريال</div>
       </div>
-      <div class="value-card fade-up">
-        <div class="value-number">02</div>
-        <div class="value-icon-wrap">🤝</div>
-        <div class="value-title">الأمانة والنزاهة</div>
-        <p class="value-desc">نبني علاقاتنا على الشفافية والصدق، ونفي بوعودنا لكل عميل في كل موقف.</p>
+      <div class="inv-row">
+        <div class="inv-row-right">
+          <span class="inv-row-label">المبلغ المتبقي</span>
+          <span class="inv-row-note">يُسدَّد بعد اعتماد التصاميم وقبل تسليم الملفات</span>
+        </div>
+        <div class="inv-row-amount white">٣٠٠ ريال</div>
       </div>
-      <div class="value-card fade-up">
-        <div class="value-number">03</div>
-        <div class="value-icon-wrap">♻️</div>
-        <div class="value-title">الاستدامة</div>
-        <p class="value-desc">نراعي القيم البيئية المحلية ونلتزم بالمقاييس العالمية للحفاظ على البيئة والطاقة.</p>
-      </div>
-      <div class="value-card fade-up">
-        <div class="value-number">04</div>
-        <div class="value-icon-wrap">🛡️</div>
-        <div class="value-title">الثقة</div>
-        <p class="value-desc">الثقة هي أساس شراكتنا مع عملائنا، ونحرص على تعزيزها في كل تفاعل.</p>
-      </div>
-      <div class="value-card fade-up">
-        <div class="value-number">05</div>
-        <div class="value-icon-wrap">💎</div>
-        <div class="value-title">التميز</div>
-        <p class="value-desc">نسعى دائماً للتفوق والتميز عن غيرنا من خلال الابتكار والتطوير المستمر.</p>
-      </div>
-      <div class="value-card fade-up">
-        <div class="value-number">06</div>
-        <div class="value-icon-wrap">🚀</div>
-        <div class="value-title">التحدي</div>
-        <p class="value-desc">نستقبل التحديات بعقلية المنتصر، ونحول العقبات إلى فرص للنمو والإبداع.</p>
-      </div>
+    </div>
+  </div>
+
+  <p class="inv-footer-note">
+    ✦ حقوق الملكية الكاملة تنتقل إليك · ✦ ملفات بجميع الصيغ (AI, PDF, PNG, DOCX)
+  </p>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ═══ TIMELINE ═══ -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">مراحل التنفيذ</div>
+    <h2 class="section-title">خطوة بخطوة<br><span>١٤ يوماً</span></h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-day">اليوم ١</div>
+      <div class="tl-title">استلام العربون وبدء العمل فوراً</div>
+      <div class="tl-desc">نستلم شعارك وبياناتك ونبدأ في تطوير عناصر الهوية الأساسية</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-day">اليوم ٢ – ٥</div>
+      <div class="tl-title">المسودات الأولى لعناصر الهوية</div>
+      <div class="tl-desc">الفولدر، البزنس كارد، الورق الرسمي، الأظرف، الختم</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-day">اليوم ٦ – ٩</div>
+      <div class="tl-title">تصاميم الطباعة والمستندات</div>
+      <div class="tl-desc">الفاتورة، السندات، الخطابات الرسمية، اللوحات الإعلانية</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-day">اليوم ١٠ – ١٢</div>
+      <div class="tl-title">السوشل ميديا والتهاني</div>
+      <div class="tl-desc">هوية المنصات، تمبلتات البوستات، صور المناسبات، وسائل الدفع</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-day">اليوم ١٣</div>
+      <div class="tl-title">المراجعات النهائية</div>
+      <div class="tl-desc">تطبيق جميع التعديلات لضمان رضاك الكامل</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-day">اليوم ١٤</div>
+      <div class="tl-title">التسليم النهائي بعد الاعتماد</div>
+      <div class="tl-desc">بعد اعتمادك وسداد المبلغ المتبقي، تُسلَّم جميع الملفات منظمةً بكل الصيغ</div>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="services-section" id="services">
-  <div class="section" style="padding-bottom:0">
-    <div class="section-header fade-up">
-      <div class="section-tag">OUR SERVICES</div>
-      <h2 class="section-title">خـدماتنا</h2>
-      <p class="section-desc">منظومة خدمات متكاملة تلبي احتياجات عملائنا بأعلى معايير الجودة والاحترافية</p>
-    </div>
-    <div class="services-grid">
+<div class="full-divider"></div>
 
-      <div class="service-card fade-up">
-        <div class="service-stripe"></div>
-        <div class="service-body">
-          <div class="service-icon-num">
-            <div class="service-num">01</div>
-            <div class="service-emoji">🏢</div>
-          </div>
-          <div class="service-title">إدارة المرافق</div>
-          <p class="service-desc">إدارة المرافق من خلال تنسيق الأعمال بين المباني والأفراد والبنى الأساسية، وخدمات الطاقة والمياه والتصريف، لإطالة العمر الافتراضي للمبنى بطريقة فعالة وغير مكلفة.</p>
-        </div>
-      </div>
-
-      <div class="service-card fade-up">
-        <div class="service-stripe"></div>
-        <div class="service-body">
-          <div class="service-icon-num">
-            <div class="service-num">02</div>
-            <div class="service-emoji">🧹</div>
-          </div>
-          <div class="service-title">التنظيف الداخلي للمباني</div>
-          <p class="service-desc">خدمات تنظيف فورية ذات جودة عالية، من خلال إزالة النفايات وإفراغ الحاويات وتنظيف الأرضيات والجدران والأسقف والمداخن وقنوات التهوية وكل ما هو ضمن نطاق المباني داخلياً.</p>
-        </div>
-      </div>
-
-      <div class="service-card fade-up">
-        <div class="service-stripe"></div>
-        <div class="service-body">
-          <div class="service-icon-num">
-            <div class="service-num">03</div>
-            <div class="service-emoji">🏗️</div>
-          </div>
-          <div class="service-title">التنظيف الخارجي للمباني</div>
-          <p class="service-desc">خدمات غسيل وتنظيف لواجهات المباني الزجاجية والحجرية والرخامية، باحترافية من خلال توفير فرق عمل متكاملة ومتخصصة وباستخدام أحدث الآلات والتقنيات.</p>
-        </div>
-      </div>
-
-      <div class="service-card fade-up">
-        <div class="service-stripe"></div>
-        <div class="service-body">
-          <div class="service-icon-num">
-            <div class="service-num">04</div>
-            <div class="service-emoji">🔧</div>
-          </div>
-          <div class="service-title">صيانة السباكة والكهرباء</div>
-          <p class="service-desc">إصلاح وتركيب أنظمة السباكة وتركيب وصيانة الأنظمة الكهربائية وتقديم حلول مبتكرة وعالية الكفاءة، بأيدي متخصصين معتمدين.</p>
-        </div>
-      </div>
-
-      <div class="service-card fade-up">
-        <div class="service-stripe"></div>
-        <div class="service-body">
-          <div class="service-icon-num">
-            <div class="service-num">05</div>
-            <div class="service-emoji">💧</div>
-          </div>
-          <div class="service-title">خدمات المياه والصرف الصحي</div>
-          <p class="service-desc">كشف وفحص تسريبات المياه والحمامات، وتنظيف وعزل خزانات المياه والمسابح، وتوريد المياه المحلاة وتوفير خدمة نضح مياه الصرف الصحي.</p>
-        </div>
-      </div>
-
-      <div class="service-card fade-up">
-        <div class="service-stripe"></div>
-        <div class="service-body">
-          <div class="service-icon-num">
-            <div class="service-num">06</div>
-            <div class="service-emoji">🛗</div>
-          </div>
-          <div class="service-title">صيانة المصاعد</div>
-          <p class="service-desc">استخدام أحدث التقنيات وبواسطة مهندسين مختصين لإصلاح وصيانة المصاعد في أقصر وقت وبدقة عالية، مع ضمان السلامة التامة.</p>
-        </div>
-      </div>
-
-      <div class="service-card fade-up">
-        <div class="service-stripe"></div>
-        <div class="service-body">
-          <div class="service-icon-num">
-            <div class="service-num">07</div>
-            <div class="service-emoji">❄️</div>
-          </div>
-          <div class="service-title">أعمال التكييف</div>
-          <p class="service-desc">صيانة وتشغيل المكيفات وأنظمة التبريد بأنواعها، بأعلى جودة وبأيدي مهندسين مختصين، لضمان بيئة مريحة وكفاءة طاقة عالية.</p>
-        </div>
-      </div>
-
-      <div class="service-card fade-up">
-        <div class="service-stripe"></div>
-        <div class="service-body">
-          <div class="service-icon-num">
-            <div class="service-num">08</div>
-            <div class="service-emoji">🔥</div>
-          </div>
-          <div class="service-title">نظام مكافحة الحرائق</div>
-          <p class="service-desc">توفير وصيانة الخدمات المتعلقة بأنظمة إطفاء الحرائق بواسطة مهندسين مختصين ومؤهلين لتحقيق الأمن والسلامة القصوى.</p>
-        </div>
-      </div>
-
-      <div class="service-card fade-up">
-        <div class="service-stripe"></div>
-        <div class="service-body">
-          <div class="service-icon-num">
-            <div class="service-num">09</div>
-            <div class="service-emoji">🐛</div>
-          </div>
-          <div class="service-title">مكافحة الحشرات</div>
-          <p class="service-desc">مكافحة جميع أنواع الحشرات بأحدث الوسائل والتقنيات وفي أسرع وقت ممكن لتوفير بيئة نظيفة وآمنة وصحية لعملائنا.</p>
-        </div>
-      </div>
-
-    </div>
+<!-- ═══ CTA ═══ -->
+<section class="cta-section">
+  <h2>جاهز تبدأ<br><span style="color:var(--gold)">يا مشاري؟ 🚀</span></h2>
+  <p>حوّل العربون وابدأ رحلتك نحو هوية بصرية احترافية</p>
+  <a href="https://wa.me/966537441043" class="cta-btn">تواصل عبر واتساب 📲</a>
+  <div class="cta-pills">
+    <span class="cta-pill">🔒 دفع آمن</span>
+    <span class="cta-pill">⚡ تسليم في ١٤ يوماً</span>
+    <span class="cta-pill">🎨 تصميم مخصص ١٠٠٪</span>
+    <span class="cta-pill">🔄 مراجعات مجانية</span>
+    <span class="cta-pill">📁 ملفات كاملة بكل الصيغ</span>
   </div>
 </section>
 
-<!-- WHY US -->
-<section class="why-section" id="why">
-  <div class="section" style="padding-bottom:0">
-    <div class="section-header fade-up">
-      <div class="section-tag">WHY NIBRA</div>
-      <h2 class="section-title">لماذا نيبرا؟</h2>
-      <p class="section-desc">ما يميزنا هو التزامنا الراسخ بالجودة والابتكار وخدمة عملائنا بأعلى المستويات</p>
-    </div>
-    <div class="why-grid">
-      <div class="why-item fade-up">
-        <div class="why-icon">⚡</div>
-        <div class="why-text">
-          <h4>تقنيات حديثة ومنهجيات ذكية</h4>
-          <p>العمل وفق تقنيات حديثة ومنهجيات عمل ذكية ومدروسة ومجربة تضمن تحقيق السرعة والإتقان وبأقل إزعاج.</p>
-        </div>
-      </div>
-      <div class="why-item fade-up">
-        <div class="why-icon">👥</div>
-        <div class="why-text">
-          <h4>قوى عاملة مميزة ومدربة</h4>
-          <p>تلبية رغبة العملاء في توفير القوى العاملة المميزة والمدربة وتطويرها وفق احتياجاتهم المتعددة.</p>
-        </div>
-      </div>
-      <div class="why-item fade-up">
-        <div class="why-icon">🔄</div>
-        <div class="why-text">
-          <h4>تحسين مستمر وابتكار</h4>
-          <p>التحسين المستمر والابتكار في فريقنا وتقنياتنا وعملياتنا للبقاء في الطليعة وتقديم أفضل الحلول.</p>
-        </div>
-      </div>
-      <div class="why-item fade-up">
-        <div class="why-icon">🌍</div>
-        <div class="why-text">
-          <h4>معايير عالمية مع قيم محلية</h4>
-          <p>مراعاة القيم الأخلاقية المحلية في المحافظة على البيئة والطاقة، والالتزام بالمقاييس العالمية في الإنجاز.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <div class="section" style="padding-bottom:0">
-    <div class="section-header fade-up">
-      <div class="section-tag">CONTACT US</div>
-      <h2 class="section-title">تواصل معنا</h2>
-      <p class="section-desc">نحن هنا للإجابة على استفساراتكم وتلبية احتياجاتكم في أقرب وقت</p>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-info-card fade-up">
-        <h3>بيانات التواصل</h3>
-        <p class="sub">يسعدنا التواصل معكم في أي وقت</p>
-
-        <div class="contact-detail">
-          <div class="contact-detail-icon">📞</div>
-          <div class="contact-detail-info">
-            <div class="contact-detail-label">الهاتف</div>
-            <div class="contact-detail-value">0596062777</div>
-          </div>
-        </div>
-
-        <div class="contact-detail">
-          <div class="contact-detail-icon">✉️</div>
-          <div class="contact-detail-info">
-            <div class="contact-detail-label">البريد الإلكتروني</div>
-            <div class="contact-detail-value">info@nibra.sa</div>
-          </div>
-        </div>
-
-        <div class="contact-detail">
-          <div class="contact-detail-icon">📍</div>
-          <div class="contact-detail-info">
-            <div class="contact-detail-label">العنوان</div>
-            <div class="contact-detail-value" style="direction:rtl; text-align:right; font-size:14px">طريق الإمام محمد بن سعود، حي اليرموك، الرياض</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="contact-map-placeholder fade-up">
-        <div class="map-icon">🗺️</div>
-        <div class="map-details">
-          <h4>موقعنا</h4>
-          <p>طريق الإمام محمد بن سعود<br>حي اليرموك، الرياض<br>المملكة العربية السعودية</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-brand">
-    <div class="footer-logo-circle"><span>ن</span></div>
-    <div class="footer-brand-text">
-      <h4>نيبرا</h4>
-      <p>NiBRA — للتشغيل والصيانة</p>
-    </div>
-  </div>
-  <div class="footer-copy">
-    جميع الحقوق محفوظة &copy; <span>نيبرا</span> 2025
-  </div>
-  <div style="color: rgba(255,255,255,0.4); font-size:13px;">
-    info@nibra.sa &nbsp;|&nbsp; 0596062777
-  </div>
+<div class="full-divider"></div>
+<footer class="footer">
+  <div class="footer-brand"><span>نِداد</span> للتصاميم والجرافيكس</div>
+  <div class="footer-phone">+966 537 441 043</div>
 </footer>
 
 <script>
-  // Scroll animation observer
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  // رقم الفاتورة تلقائي
+  const now = new Date();
+  const mm = String(now.getMonth()+1).padStart(2,'0');
+  const dd = String(now.getDate()).padStart(2,'0');
+  const yy = String(now.getFullYear()).slice(2);
+  document.getElementById('inv-num').textContent = yy + mm + dd + '02';
 
-  document.querySelectorAll('.fade-up').forEach((el, i) => {
-    el.style.transitionDelay = `${(i % 3) * 0.1}s`;
-    observer.observe(el);
-  });
-
-  // Smooth nav highlight
-  const sections = document.querySelectorAll('section[id], div[id]');
-  const navLinks = document.querySelectorAll('.nav-links a');
-
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-      if (window.scrollY >= section.offsetTop - 100) {
-        current = section.getAttribute('id');
-      }
-    });
-    navLinks.forEach(link => {
-      link.style.color = link.getAttribute('href') === `#${current}` ? 'var(--gold)' : '';
-    });
-  });
+  // التاريخ بالعربي
+  const opts = { year:'numeric', month:'long', day:'numeric' };
+  const ar = now.toLocaleDateString('ar-SA', opts);
+  document.getElementById('inv-date').textContent = ar;
+  document.getElementById('client-date').textContent = ar;
 </script>
 
 </body>
